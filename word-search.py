@@ -29,7 +29,7 @@ class Solution:
     def canMove(self, i, j, moves, checkBoard):
         if checkBoard[i][j] == True:
             return False
-        if i + moves[0] >= len(checkBoard) or i + moves[0] < 0 or j + moves[1] >= len(checkBoard[0]) or j + moves[1] < 0:
+        if i + moves[0] > len(checkBoard) or i + moves[0] < 0 or j + moves[1] > len(checkBoard[0]) or j + moves[1] < 0:
             return False
         return True
         
