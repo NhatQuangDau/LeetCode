@@ -13,16 +13,15 @@ class Solution:
         checkBoard = [[False]*len(board[0]) for _ in range(len(board))]
         print(checkBoard)
         for point in startPoints:
-            if self.backtrack(board, checkBoard, point[0], point[1], 1, word):
-                return True
+            
         
         return False
             
     def backtrack(self, board, checkBoard, i, j, strLength, word):
+        if board[i][j] != word[strLength - 1]:
+            return False
         if strLength == len(word):
             return True
-        if board[i][j] != word[strLength]:
-            return False
         
         checkBoard[i][j] = True
         print(board[i][j])
