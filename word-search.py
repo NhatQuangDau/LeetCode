@@ -7,6 +7,7 @@ class Solution:
             for j in range(len(board[0])):
                 if board[i][j] == startSearch:
                     startPoints.append((i,j))
+        print(startPoints)
         checkBoard = [[False]*len(board[0]) for _ in range(len(board))]
         for i in range(len(startPoints)):
             if self.backtrack(board, checkBoard, startPoints[i][0], startPoints[i][1], 0, word, moves):
@@ -22,7 +23,8 @@ class Solution:
             for h in range(len(moves)):
                 if self.canMove(i, j, moves[h], checkBoard):
                     tempResult = tempResult or self.backtrack(board, checkBoard, i + moves[h][0], j + moves[h][1], strLength + 1, word)
-            return tempResult
+            if tempResult:        
+                return tempResult
         else:
             checkBoard[i][j] = False
             return False
