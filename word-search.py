@@ -34,9 +34,11 @@ class Solution:
         return tempResult
         
     def canMove(self, i, j, move, checkBoard):
-        if i + move[0] >= len(checkBoard) or i + move[0] < 0 or j + move[1] >= len(checkBoard[0]) or j + move[1] < 0:
+        x = i + move[0]
+        y = j + move[1]
+        if x >= len(checkBoard) or x < 0 or y >= len(checkBoard[0]) or y < 0:
             return False
-        if checkBoard[i][j] == True:
+        if checkBoard[x][y] == True:
             return False
         return True
         
