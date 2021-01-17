@@ -17,6 +17,7 @@ class Solution:
             return True
         if board[i][j] == word[strLength]:
             checkBoard[i][j] = True
+            print(board[i][j])
             tempResult = False
             for h in range(len(moves)):
                 if self.canMove(i, j, moves[h], checkBoard):
