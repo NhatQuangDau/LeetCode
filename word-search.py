@@ -13,7 +13,7 @@ class Solution:
         checkBoard = [[False]*len(board[0]) for _ in range(len(board))]
         print(checkBoard)
         for point in startPoints:
-            if self.backtrack(board, checkBoard, point[0], point[1], 0, word):
+            if self.backtrack(board, checkBoard, point[0], point[1], 1, word):
                 return True
         
         return False
