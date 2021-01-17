@@ -9,6 +9,7 @@ class Solution:
                     startPoints.append((i,j))
         print(startPoints)
         checkBoard = [[False]*len(board[0]) for _ in range(len(board))]
+        print(checkBoard)
         for i in range(len(startPoints)):
             if self.backtrack(board, checkBoard, startPoints[i][0], startPoints[i][1], 0, word, moves):
                 return True
@@ -31,9 +32,9 @@ class Solution:
         return False
         
     def canMove(self, i, j, moves, checkBoard):
-        if checkBoard[i][j] == True:
-            return False
         if i + moves[0] > len(checkBoard) or i + moves[0] < 0 or j + moves[1] > len(checkBoard[0]) or j + moves[1] < 0:
+            return False
+        if checkBoard[i][j] == True:
             return False
         return True
         
