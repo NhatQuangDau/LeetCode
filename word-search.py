@@ -16,18 +16,19 @@ class Solution:
     def backtrack(self, board, checkBoard, i, j, strLength, word, moves):
         if strLength == len(word):
             return True
-        if board[i][j] == word[strLength]:
-            checkBoard[i][j] = True
-            print(board[i][j])
-            tempResult = False
-            for h in range(len(moves)):
-                if self.canMove(i, j, moves[h], checkBoard):
-                    tempResult = tempResult or self.backtrack(board, checkBoard, i + moves[h][0], j + moves[h][1], strLength + 1, word)
-            if tempResult:        
-                return tempResult
-        else:
-            checkBoard[i][j] = False
+        if board[i][j] != word[strLength]:
             return False
+        
+        checkBoard[i][j] = True
+        print(board[i][j])
+        tempResult = False
+        for h in range(len(moves)):
+            if self.canMove(i, j, moves[h], checkBoard):
+                tempResult = tempResult or self.backtrack(board, checkBoard, i + moves[h][0], j + moves[h][1], strLength + 1, word)
+        if tempResult:        
+            return tempResult
+        checkBoard[i][j] = False
+        return False
         
     def canMove(self, i, j, moves, checkBoard):
         if checkBoard[i][j] == True:
