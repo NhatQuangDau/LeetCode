@@ -8,10 +8,11 @@ class Solution:
     def backtrack(self,candidates, index, target, tempCandidates,tempResult, result):
         if index == len(candidates) or tempResult + candidates[index] > target:
             return
-        if tempResult + candidates[index] == target:
-            tempCandidates.append(candidates[index])
+        tempResult += candidates[index]
+        tempCandidates.append(candidates[index])
+        if tempResult == target:
             result.append(tempCandidates)
             return
-        self.backtrack(candidates, index, target, tempCandidates, tempResult, result)
-        self.backtrack(candidates, index + 1, target, tempCandidates, tempResult, result)
+        self.backtrack(candidates, index, target, tempCandidates.copy(), tempResult, result)
+        self.backtrack(candidates, index + 1, target, tempCandidates.copy(), tempResult, result)
         
