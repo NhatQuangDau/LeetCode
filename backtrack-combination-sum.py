@@ -14,5 +14,7 @@ class Solution:
             result.append(tempCandidates)
             return
         self.backtrack(candidates, index, target, tempCandidates.copy(), tempResult, result)
+        tempResult -= candidates[index]
+        tempCandidates.pop()
         self.backtrack(candidates, index + 1, target, tempCandidates.copy(), tempResult, result)
         
