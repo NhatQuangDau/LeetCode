@@ -3,16 +3,18 @@ from copy import deepcopy
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         result = []
-        check_move = set()
+        check_move_vertical = set()
+        check_move_diagonal1 = set()
+        check_move_diagonal2 = set()
         for i in range(n):
-            self.backtrack(n, 0, i, [], check_move.copy(), result)
+            self.backtrack(n, 0, i, [], check_move_vertical.copy(), check_move_diagonal1.copy(), check_move_diagonal2.copy(), result)
         return result
         
-    def backtrack(self, n, x, y, config, check_move, result):
-        if not self.can_move(x, y, check_move):
+    def backtrack(self, n, x, y, config, check_move_vertical, check_move_diagonal1, check_move_diagonal2, result):
+        if not self.can_move(x, y, check_move_vertical, check_move_diagonal1, check_move_diagonal2):
             return
         
-        self.fill(x, y, check_move)
+        self.fill(x, y, check_move_vertical, check_move_diagonal1, check_move_diagonal2)
         queen_position = ''.join(['.' if i != y else 'Q' for i in range(n)])
         config.append(queen_position)
         
@@ -21,14 +23,14 @@ class Solution:
             return
         
         for i in range(n):
-            self.backtrack(n, x + 1, i, config.copy(), check_move.copy(), result)
+            self.backtrack(n, x + 1, i, config.copy(), check_move_vertical.copy(), check_move_diagonal1.copy(), check_move_diagonal2.copy(), result)
              
-    def can_move(self, x, y, check_move) -> bool:
-        if y in check_move or (x - y) in check_move or (x + y) in check_move:
+    def can_move(self, x, y, check_move_vertical, check_move_diagonal1, check_move_diagonal2) -> bool:
+        if y in check_move_vertical or (x - y) in check_move_diagonal1 or (x + y) in check_move_diagonal2:
             return False
         return True
     
-    def fill(self, x, y, check_move):
-        check_move.add(y)
-        check_move.add(x - y)
-        check_move.add(x + y)
+    def fill(self, x, y, check_move_vertical, check_move_diagonal1, check_move_diagonal2):
+        check_move_vertical.add(y)
+        check_move_diagonal1.add(x - y)
+        check_move_diagonal2.add(x + y)
