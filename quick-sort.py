@@ -11,17 +11,20 @@ class Solution:
         p = self.partition(arr, start, end)
         self.quickSort(arr, start, p - 1)
         self.quickSort(arr, p + 1, end)
-    
+
     def partition(self, arr, start, end) -> int: #Return the pivot index
-        p = end
-        while start <= end:
-            if arr[start] > arr[p] and start < p:
-                temp = p
-                arr[start], arr[temp] = arr[temp], arr[start]
-                p = start
-            elif arr[start] <= arr[p] and start > p:
-                temp = p
-                arr[start], arr[temp] = arr[temp], arr[start]
-                p = start
-            start += 1
-        return p
+        pivot = arr[end]
+        pIndex = end # original pivot index
+        end -= 1
+        while start < end:
+            while start < end and arr[start] <= pivot:
+                start += 1
+            while start < end and arr[end] > pivot:
+                end -= 1
+            if start<end:
+                arr[start], arr[end] = arr[end], arr[start]
+        if arr[start] > arr[pIndex]:
+            arr[start], arr[pIndex] = arr[pIndex], arr[start]
+        else:
+            return pIndex 
+        return start # new pivot index
