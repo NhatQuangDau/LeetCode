@@ -1,2 +1,24 @@
 #Count sort
 #not really a ordinary sort, it does not use comparision and swapping element, Instead it just count the ocurrences of element and then construct new result
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        minNo = 99999 # the requirement said that -50000 <= Num <= 50000, so pick -99999, 99999 is more than enough
+        maxNo = -99999
+        lenArr = len(nums)
+        dictNo = dict()
+        result = []
+        for i in range(lenArr):
+            if nums[i] < minNo:
+                minNo = nums[i]
+            if nums[i] > maxNo:
+                maxNo = nums[i]
+            if nums[i] in dictNo:
+                dictNo[nums[i]] += 1
+            else:
+                dictNo[nums[i]] = 1
+        for i in range(minNo, maxNo + 1):
+            if i in dictNo:
+                for j in range(dictNo[i]):
+                    result.append(i)
+        return result
